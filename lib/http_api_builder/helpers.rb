@@ -57,8 +57,8 @@ module HttpApiBuilder
     # Raise an ArgumentError if not everything listed as required is not listed in supplied.
     #
     def validate_required_arguments(supplied, required)
-      missing = supplied & required
-      return if missing.sort == required.sort
+      missing = required - supplied
+      return if missing.empty?
 
       raise ArgumentError, "missing required arguments: #{missing.join(', ')}"
     end
