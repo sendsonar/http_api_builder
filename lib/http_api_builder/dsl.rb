@@ -35,7 +35,7 @@ module HttpApiBuilder
 
     VERBS.each do |v|
       define_method v do |path, **opts|
-        consume path, using: v, **opts
+        endpoint path, using: v, **opts
       end
     end
 
