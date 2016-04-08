@@ -88,6 +88,7 @@ module HttpApiBuilder
       required, optional = Hash(params).values_at(*%i(required optional)).map { |list| Array(list) }
 
       required += interpolated_params(path)
+      optional += %i(form body json)
 
       [required, optional]
     end
