@@ -23,7 +23,7 @@ module HttpApiBuilder
     # Accepts these params, for you to do whatever you like with. See the HTTPrb_client implementation
     #
     # @param [Symbol] method The HTTP VERB to use
-    # @param [Addressable::URI] uri The url to make the request to 
+    # @param [URI] uri The url to make the request to
     # @param [Hash] form: nil Form data, for encoding into HTTP form encoding
     # @param [Hash] query: nil Query key/value pairs
     # @param [String] body: nil A raw body
