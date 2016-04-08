@@ -1,4 +1,5 @@
 require 'http'
+require 'addressable/template'
 
 module HttpApiBuilder
   module Client
@@ -6,8 +7,7 @@ module HttpApiBuilder
     # This is functional and pretty much production ready, but you can
     # easily rewrite it to use curb or typhoeus or anything else really
     module HttpRb
-      def request(verb, path, form:, query:, body:, json:) # rubocop:disable Metrics/ParameterLists
-        url = URI.join(self.class.base_url || '', path)
+      def request(verb, url, form:, query:, body:, json:) # rubocop:disable Metrics/ParameterLists
         HTTP.send(verb, url, form: form, params: query, body: body, json: json)
       end
     end

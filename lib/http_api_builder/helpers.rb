@@ -71,5 +71,22 @@ module HttpApiBuilder
 
       raise ArgumentError, "unrecognized arguments: #{unrecognized.join(', ')}"
     end
+
+    # Handle's building paths
+    def build_url(path)
+      parsed_base = Addressable::URI.parse(self.class.base_url)
+      parsed_basepath = parsed_base.path.split('/').reject(&:empty?)
+
+      addressable_path = Addressable::URI.parse(path)
+
+      return addressable_path unless addressable_path.relative?
+      parsed_path = addressable_path.path.split('/').reject(&:empty?)
+
+      parsed_basepath += parsed_path
+
+      parsed_base.path = parsed_basepath.join('/')
+
+      parsed_base
+    end
   end
 end
