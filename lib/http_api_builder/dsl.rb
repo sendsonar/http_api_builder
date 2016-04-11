@@ -47,14 +47,14 @@ module HttpApiBuilder
       required, optional = requirements(path, params)
 
       define_method :"#{name}!" do |opts = {}|
+        json = opts.delete(:json) || json
+        body = opts.delete(:body) || body
         validate_args! opts.keys, required, optional
 
         reqpath = interpolate_path(path, opts)
         query = query_params(path, opts, required, optional)
 
         form = Hash(form).merge(Hash(opts[:form]))
-        json = opts[:json] || json
-        body = opts[:body] || body
         perform(using, reqpath, form: form, query: query, body: body, json: json) do |resource, *_|
           run_processors resource, processors
         end
