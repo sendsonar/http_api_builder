@@ -16,7 +16,7 @@ module HttpApiBuilder
       response = request(method, url, form: form, query: query, body: body, json: json)
       status = response.status
       resource = response.body
-      block_given? ? yield(resource, status, response) : resource
+      block_given? ? yield(response, status, resource) : response
     end
 
     # Placeholder for your request method.
